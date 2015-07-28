@@ -1,48 +1,63 @@
 {
 	
 	// standad values
-	double stdConstant = 1260;
-	double stdMPV      = 9.49;   // most probably value
-	double stdSigma    = 0.55;
-	
+	double stdConstant = 16.4;
+	double stdSF       = 0.273;   // sampling fraction
+	double stdSigma    = 0.0097;
+	double mom         = 5;       // 5 GeV initial momentum
 	
 	TCanvas *ecC = new TCanvas("ecC", "ecC", 800, 800);
 	
-	TFile f("ec.root");
+	TFile finp("ec.root");
 	
-	TH1F *edep = new TH1F("edep", "edep", 100, 5, 20);
+	TH1F *edep = new TH1F("edep", "edep", 100, 0.1, 0.5);
 	
-	ec->Draw("totEdep>>edep");
+	// EC Hits
+	vector<double> *ecTotE = 0;
+
+	TTree *ecT  = (TTree*)finp.Get("ec");
+	ecT->SetBranchAddress("totEdep",     &ecTotE);
+
+	for(int i=0; i<ecT->GetEntries(); i++)
+	{
+		ecT->GetEntry(i);
+		double sampF = 0;
+		
+		for(unsigned d=0; d<(*ecTotE).size(); d++)
+			sampF += (*ecTotE)[d] / mom / 1000;
+		
+		edep->Fill(sampF);
+		
+	}
+	
+	edep->Fit("gaus");
+	edep->GetXaxis()->SetRangeUser(0.2, 0.35);
 	
 	
-	edep->Fit("landau");
-	
-	
-	double devConstant = edep->GetFunction("landau")->GetParameter(0);
-	double devMPV      = edep->GetFunction("landau")->GetParameter(1);
-	double devSigma    = edep->GetFunction("landau")->GetParameter(2);
+	double devConstant = edep->GetFunction("gaus")->GetParameter(0);
+	double devSF       = edep->GetFunction("gaus")->GetParameter(1);
+	double devSigma    = edep->GetFunction("gaus")->GetParameter(2);
 
 	double diffConstant = 100*(devConstant - stdConstant)/stdConstant;
-	double diffMPV      = 100*(devMPV - stdMPV)/stdMPV;
+	double diffSF       = 100*(devSF - stdSF)/stdSF;
 	double diffSigma    = 100*(devSigma - stdSigma)/stdSigma;
 
-	
-	cout << " EC Test: Edep Landau Constant percentage difference: " << diffConstant << " %" << endl;
-	cout << " EC Test: Edep Landau MPV percentage difference: "      << diffMPV      << " %" << endl;
-	cout << " EC Test: Edep Landau Sigma percentage difference: "    << diffSigma    << " %" << endl;
+	cout << " EC Test: Edep Sampling Fraction Constant percentage difference: " << diffConstant << " %" << endl;
+	cout << " EC Test: Edep Sampling Fraction MPV percentage difference: "      << diffSF       << " %" << endl;
+	cout << " EC Test: Edep Sampling Fraction Sigma percentage difference: "    << diffSigma    << " %" << endl;
 
 	
-	TF1 *theo = new TF1("theo", "landau", 5, 20);
+	TF1 *theo = new TF1("theo", "gaus", 0, 0.5);
 	
 	theo->SetParameter(0, stdConstant);
-	theo->SetParameter(1, stdMPV);
+	theo->SetParameter(1, stdSF);
 	theo->SetParameter(2, stdSigma);
 
 	theo->SetLineColor(kBlue);
 	theo->SetLineStyle(2);
 	theo->Draw("same");
 	
-	ftofC->Print("ftofTest.png");
+	ecC->Print("ecTest.png");
 	
 	
 }

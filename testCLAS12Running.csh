@@ -2,7 +2,7 @@
 # -------
 
 # 2000 events take 24 seconds on my laptop
-set nevents      = 1000
+set nevents      = 100
 set standardTime = 60
 
 echo
