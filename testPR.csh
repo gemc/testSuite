@@ -29,15 +29,18 @@ rm -rf gemcTest
 mkdir  gemcTest
 cd     gemcTest
 
-touch result.txt
 
-./testCompilation.csh >> result.txt
+./testCompilation.csh > result.txt
 
 # getting and unpacking clas12 geometry
 wget http://jlab.org/12gev_phys/packages/gcards/experiments-devel.tar
 tar xpvf experiments-devel.tar
 
-./testFTOFRUnning.csh | grep -v "0+0" >> result.txt
+./testFTOFRunning.csh   | grep -v "0+0" >> result.txt
+./testECRunning.csh     | grep -v "0+0" >> result.txt
+./testSolenoidField.csh | grep -v "0+0" >> result.txt
+./testTorusField.csh    | grep -v "0+0" >> result.txt
+./testCLAS12Running.csh | grep -v "0+0" >> result.txt
 
 
 

@@ -1,7 +1,7 @@
 # Running
 # -------
 
-# 2000 events take 24 seconds on my laptop
+# 100 events take 73 seconds on my laptop
 set nevents      = 100
 set standardTime = 73
 
