@@ -25,6 +25,6 @@ $BANKS/bin/evio2root -INPUTF=out.ev -B=experiments/clas12/ftof/ftof  >& /dev/nul
 mv out.root ftof.root
 rm out.ev
 
-root -l -b -q ftofTest.C | tail -3
+root -l -q ftofTest.C | tail -3
 
 echo
