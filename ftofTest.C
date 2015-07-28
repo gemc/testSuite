@@ -1,9 +1,9 @@
 {
 	
 	// standad values
-	double stdConstant = 494;
-	double stdMPV      = 9.47;   // most probably value
-	double stdSigma    = 0.53;
+	double stdConstant = 1260;
+	double stdMPV      = 9.49;   // most probably value
+	double stdSigma    = 0.55;
 	
 	
 	
@@ -17,13 +17,17 @@
 	edep->Fit("landau");
 	
 	
-	double devConstant = 100*(edep->GetFunction("landau")->GetParameter(0) - stdConstant)/stdConstant;
-	double devMPV      = 100*(edep->GetFunction("landau")->GetParameter(1) - stdMPV)/stdMPV;
-	double devSigma    = 100*(edep->GetFunction("landau")->GetParameter(2) - stdSigma)/stdSigma;
+	double devConstant = edep->GetFunction("landau")->GetParameter(0);
+	double devMPV      = edep->GetFunction("landau")->GetParameter(1);
+	double devSigma    = edep->GetFunction("landau")->GetParameter(2);
+
+	double diffConstant = 100*(devConstant - stdConstant)/stdConstant;
+	double diffMPV      = 100*(devMPV - stdMPV)/stdMPV;
+	double diffSigma    = 100*(devSigma - stdSigma)/stdSigma;
 
 	
-	cout << " FTOF Test: Edep Landau Constant percentage difference: " << devConstant << endl;
-	cout << " FTOF Test: Edep Landau MPV percentage difference: "      << devMPV << endl;
-	cout << " FTOF Test: Edep Landau Sigma percentage difference: "    << devSigma << endl;
+	cout << " FTOF Test: Edep Landau Constant percentage difference: " << diffConstant << "%" << endl;
+	cout << " FTOF Test: Edep Landau MPV percentage difference: "      << diffMPV      << "%" << endl;
+	cout << " FTOF Test: Edep Landau Sigma percentage difference: "    << diffSigma    << "%" << endl;
 	
 }

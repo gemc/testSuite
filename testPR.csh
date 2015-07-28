@@ -37,7 +37,7 @@ touch result.txt
 wget http://jlab.org/12gev_phys/packages/gcards/experiments-devel.tar
 tar xpvf experiments-devel.tar
 
-./testFTOFRUnning.csh >> result.txt
+./testFTOFRUnning.csh | grep -v "0+0" >> result.txt
 
 
 
