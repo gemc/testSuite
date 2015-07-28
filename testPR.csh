@@ -29,10 +29,10 @@ rm -rf gemcTest
 mkdir  gemcTest
 cd     gemcTest
 
-git clone https://github.com/gemc/test.git
+git clone https://github.com/gemc/test.git >& /dev/null
 
 cd test
-git clone $branch
+git clone $branch >& /dev/null
 
 echo
 echo " > Testing compilation..."
