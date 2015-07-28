@@ -29,19 +29,32 @@ rm -rf gemcTest
 mkdir  gemcTest
 cd     gemcTest
 
+git clone https://github.com/gemc/test.git
 
+cd test
+git clone $branch
+
+echo
+echo " > Testing compilation..."
 ./testCompilation.csh > result.txt
 
 # getting and unpacking clas12 geometry
 wget http://jlab.org/12gev_phys/packages/gcards/experiments-devel.tar
 tar xpvf experiments-devel.tar
 
-./testFTOFRunning.csh   | grep -v "0+0" >> result.txt
-./testECRunning.csh     | grep -v "0+0" >> result.txt
-./testSolenoidField.csh | grep -v "0+0" >> result.txt
-./testTorusField.csh    | grep -v "0+0" >> result.txt
-./testCLAS12Running.csh | grep -v "0+0" >> result.txt
 
+echo " > Testing clas12 ftof running..."
+./testFTOFRunning.csh   | grep -v "0+0" >> result.txt
+echo " > Testing clas12 ec running..."
+./testECRunning.csh     | grep -v "0+0" >> result.txt
+echo " > Testing clas12 running..."
+./testCLAS12Running.csh | grep -v "0+0" >> result.txt
+echo " > Testing clas12 solenoid..."
+./testSolenoidField.csh | grep -v "0+0" >> result.txt
+echo " > Testing clas12 torus..."
+./testTorusField.csh    | grep -v "0+0" >> result.txt
+echo "... done!"
+echo
 
 
 

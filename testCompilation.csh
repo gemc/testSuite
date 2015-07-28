@@ -6,7 +6,6 @@
 
 # Compilation
 # -----------
-git clone $branch
 cd source
 scons -jminNcores OPT=1 | grep -v Compiling >& testCompilation
 if( -f gemc) then
@@ -17,3 +16,5 @@ if(`grep warning testCompilation | wc | awk '{print $1}' != 0`) then
 else
 	echo Warnings: NO WARNINGS
 endif
+
+cd ..
