@@ -18,7 +18,7 @@
 #   - clas12 full, with fields: speed and efficiency.
 #
 # > Fields:
-#   - clas12 torus value at 4 points
+#   - clas12 torus value (1 point)
 #   - clas12 solenoid value at 4 points
 #
 

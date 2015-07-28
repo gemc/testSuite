@@ -6,9 +6,9 @@ set x = 50;
 set y = 60;
 set z = 300;
 
-
-set stdPos   = " (45 deg, 70.7107 cm, 300 cm)"
-set stdField = " (-1.00466, 0.861871, -0.3861) tesla"
+set stdTime  =  22 # 22 seconds to read the map
+set stdPos   = "(50.1944 deg, 78.1025 cm, 300 cm)"
+set stdField = "(-0.894079, 0.68461, -0.20967) tesla"
 
 echo
 
@@ -24,3 +24,22 @@ set thisPos   = `grep "Track position in magnetic field (phi, r, z)" logTorusRun
 set thisField = `grep "Field Values (absolute) (Bx, By, Bz)"         logTorusRunning | awk -F"Bz\\)" '{print $2}'`
 
 
+if("$stdPos" == "$thisPos") then
+	echo Torus Position Test: SAME
+else
+	echo Torus Position Test: $thisPos, standard was $stdPos
+endif
+
+if("$stdField" == "$thisField") then
+	echo Torus Values Test: SAME
+else
+	echo Torus Values Test: $thisField, standard was $stdField
+endif
+
+
+# check for timing.
+set time = `grep "Total gemc time" logTorusRunning | awk -F"Total gemc time:" '{print $2}' | awk -F. '{print $1}'`
+@ time -= $stdTime
+echo "Torus time test difference: "$time
+
+echo

@@ -25,6 +25,6 @@ $BANKS/bin/evio2root -INPUTF=out.ev -B=experiments/clas12/ec/ec  >& /dev/null
 mv out.root ec.root
 rm out.ev
 
-#root -l -q ecTest.C | tail -3
+root -l -q ecTest.C | tail -3
 
 echo

@@ -42,6 +42,18 @@
 	theo->SetLineStyle(2);
 	theo->Draw("same");
 	
+	
+	TLatex lab;
+	lab.SetNDC();
+	lab.SetTextColor(kBlack);
+	lab.SetTextSize(0.030);
+	
+	lab.DrawLatex(0.50, 0.70,  Form("const: %4.3f (%4.3f)", devConstant, stdConstant));
+	lab.DrawLatex(0.50, 0.65,  Form("mean:  %4.3f (%4.3f)", devMPV,      stdMPV));
+	lab.DrawLatex(0.50, 0.60,  Form("sigma: %4.3f (%4.3f)", devSigma,    stdSigma));
+	
+
+	
 	ftofC->Print("ftofTest.png");
 	
 	
