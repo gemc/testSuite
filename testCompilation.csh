@@ -7,7 +7,7 @@
 # Compilation
 # -----------
 cd source
-scons -jminNcores OPT=1 | grep -v Compiling >& testCompilation
+scons -j$minNcores OPT=1 | grep -v Compiling >& testCompilation
 if( -f gemc) then
 	echo Compilation: PASSED
 endif
