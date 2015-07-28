@@ -4,8 +4,8 @@
 #   - check for no errors
 #   - check for no warnings
 
-# Compilation
-# -----------
+set minNcores = 15
+
 cd source
 scons -j$minNcores OPT=1 | grep -v Compiling >& testCompilation
 if( -f gemc) then

@@ -23,7 +23,6 @@
 #
 
 set branch    = $1
-set minNcores = 15
 
 rm -rf gemcTest
 mkdir  gemcTest
@@ -39,23 +38,23 @@ echo " > Testing compilation..."
 ./testCompilation.csh > result.txt
 
 # getting and unpacking clas12 geometry
-wget http://jlab.org/12gev_phys/packages/gcards/experiments-devel.tar
-tar xpvf experiments-devel.tar
+#wget http://jlab.org/12gev_phys/packages/gcards/experiments-devel.tar >& /dev/null
+#tar xpvf experiments-devel.tar >& /dev/null
 
 
-echo " > Testing clas12 ftof running..."
-./testFTOFRunning.csh   | grep -v "0+0" >> result.txt
-echo " > Testing clas12 ec running..."
-./testECRunning.csh     | grep -v "0+0" >> result.txt
-echo " > Testing clas12 running..."
-./testCLAS12Running.csh | grep -v "0+0" >> result.txt
-echo " > Testing clas12 solenoid..."
-./testSolenoidField.csh | grep -v "0+0" >> result.txt
-echo " > Testing clas12 torus..."
-./testTorusField.csh    | grep -v "0+0" >> result.txt
-echo "... done!"
-echo
-
+#echo " > Testing clas12 ftof running..."
+#./testFTOFRunning.csh   | grep -v "0+0" >> result.txt
+#echo " > Testing clas12 ec running..."
+#./testECRunning.csh     | grep -v "0+0" >> result.txt
+#echo " > Testing clas12 running..."
+#./testCLAS12Running.csh | grep -v "0+0" >> result.txt
+#echo " > Testing clas12 solenoid..."
+#./testSolenoidField.csh | grep -v "0+0" >> result.txt
+#echo " > Testing clas12 torus..."
+#./testTorusField.csh    | grep -v "0+0" >> result.txt
+#echo "... done!"
+#echo
+#
 
 
 
