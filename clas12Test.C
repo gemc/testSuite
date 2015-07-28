@@ -6,13 +6,13 @@
 	double stdSigma    = 0.55;
 	
 	
-	TCanvas *ecC = new TCanvas("ecC", "ecC", 800, 800);
+	TCanvas *ftofC = new TCanvas("ftofC", "ftofC", 800, 800);
 	
-	TFile f("ec.root");
+	TFile f("ftof.root");
 	
 	TH1F *edep = new TH1F("edep", "edep", 100, 5, 20);
 	
-	ec->Draw("totEdep>>edep");
+	ftof_p1a->Draw("totEdep>>edep");
 	
 	
 	edep->Fit("landau");
@@ -27,9 +27,9 @@
 	double diffSigma    = 100*(devSigma - stdSigma)/stdSigma;
 
 	
-	cout << " EC Test: Edep Landau Constant percentage difference: " << diffConstant << " %" << endl;
-	cout << " EC Test: Edep Landau MPV percentage difference: "      << diffMPV      << " %" << endl;
-	cout << " EC Test: Edep Landau Sigma percentage difference: "    << diffSigma    << " %" << endl;
+	cout << " FTOF Test: Edep Landau Constant percentage difference: " << diffConstant << " %" << endl;
+	cout << " FTOF Test: Edep Landau MPV percentage difference: "      << diffMPV      << " %" << endl;
+	cout << " FTOF Test: Edep Landau Sigma percentage difference: "    << diffSigma    << " %" << endl;
 
 	
 	TF1 *theo = new TF1("theo", "landau", 5, 20);
