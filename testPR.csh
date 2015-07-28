@@ -38,8 +38,8 @@ echo " > Testing compilation..."
 ./testCompilation.csh > result.txt
 
 # getting and unpacking clas12 geometry
-#wget http://jlab.org/12gev_phys/packages/gcards/experiments-devel.tar >& /dev/null
-#tar xpvf experiments-devel.tar >& /dev/null
+wget http://jlab.org/12gev_phys/packages/gcards/experiments-devel.tar >& /dev/null
+tar xpvf experiments-devel.tar >& /dev/null
 
 
 #echo " > Testing clas12 ftof running..."
