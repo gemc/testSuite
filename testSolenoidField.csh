@@ -41,6 +41,4 @@ set time = `grep "Total gemc time" logSolenoidRunning | awk -F"Total gemc time:"
 @ time -= $stdTime
 echo "Solenoid time test difference: "$time
 
-
-
 echo

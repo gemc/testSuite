@@ -25,6 +25,6 @@ $BANKS/bin/evio2root -INPUTF=out.ev -B="experiments/clas12/pcal/pcal"  >& /dev/n
 mv out.root clas12.root
 rm out.ev
 
-#root -l -q clas12Test.C | tail -3
+root -l -q clas12Test.C | tail -3
 
 echo

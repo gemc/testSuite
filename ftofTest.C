@@ -14,7 +14,6 @@
 	
 	ftof_p1a->Draw("totEdep>>edep");
 	
-	
 	edep->Fit("landau");
 	
 	
@@ -25,12 +24,10 @@
 	double diffConstant = 100*(devConstant - stdConstant)/stdConstant;
 	double diffMPV      = 100*(devMPV - stdMPV)/stdMPV;
 	double diffSigma    = 100*(devSigma - stdSigma)/stdSigma;
-
 	
 	cout << " FTOF Test: Edep Landau Constant percentage difference: " << diffConstant << " %" << endl;
 	cout << " FTOF Test: Edep Landau MPV percentage difference: "      << diffMPV      << " %" << endl;
 	cout << " FTOF Test: Edep Landau Sigma percentage difference: "    << diffSigma    << " %" << endl;
-
 	
 	TF1 *theo = new TF1("theo", "landau", 5, 20);
 	
@@ -42,7 +39,6 @@
 	theo->SetLineStyle(2);
 	theo->Draw("same");
 	
-	
 	TLatex lab;
 	lab.SetNDC();
 	lab.SetTextColor(kBlack);
@@ -52,9 +48,6 @@
 	lab.DrawLatex(0.50, 0.65,  Form("mean:  %4.3f (%4.3f)", devMPV,      stdMPV));
 	lab.DrawLatex(0.50, 0.60,  Form("sigma: %4.3f (%4.3f)", devSigma,    stdSigma));
 	
-
 	
 	ftofC->Print("ftofTest.png");
-	
-	
 }

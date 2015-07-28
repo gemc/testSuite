@@ -1,10 +1,9 @@
 {
-	
 	// standad values
 	double stdConstant = 6.13;
 	double stdSF       = 0.157;   // sampling fraction
 	double stdSigma    = 0.033;
-	double mom         = 4;       // 5 GeV initial momentum
+	double mom         = 4;       // 4 GeV initial momentum
 	
 	TCanvas *pcalC = new TCanvas("pcalC", "pcalC", 800, 800);
 	
@@ -31,8 +30,6 @@
 	}
 	
 	edep->Fit("gaus");
-	//	edep->GetXaxis()->SetRangeUser(0.2, 0.35);
-	
 	
 	double devConstant = edep->GetFunction("gaus")->GetParameter(0);
 	double devSF       = edep->GetFunction("gaus")->GetParameter(1);
@@ -58,9 +55,6 @@
 	theo->Draw("same");
 	
 	
-	
-	
-	
 	TLatex lab;
 	lab.SetNDC();
 	lab.SetTextColor(kBlack);
@@ -70,8 +64,6 @@
 	lab.DrawLatex(0.60, 0.65,  Form("mean:  %4.3f (%4.3f)", devSF,       stdSF));
 	lab.DrawLatex(0.60, 0.60,  Form("sigma: %4.3f (%4.3f)", devSigma,    stdSigma));
 
-	
 	pcalC->Print("pcalTest.png");
-	
 	
 }

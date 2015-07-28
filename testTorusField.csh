@@ -36,7 +36,6 @@ else
 	echo Torus Values Test: $thisField, standard was $stdField
 endif
 
-
 # check for timing.
 set time = `grep "Total gemc time" logTorusRunning | awk -F"Total gemc time:" '{print $2}' | awk -F. '{print $1}'`
 @ time -= $stdTime

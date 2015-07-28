@@ -57,10 +57,6 @@
 	theo->SetLineStyle(2);
 	theo->Draw("same");
 	
-	
-	
-	
-	
 	TLatex lab;
 	lab.SetNDC();
 	lab.SetTextColor(kBlack);
@@ -69,9 +65,6 @@
 	lab.DrawLatex(0.60, 0.70,  Form("const: %4.3f (%4.3f)", devConstant, stdConstant));
 	lab.DrawLatex(0.60, 0.65,  Form("mean:  %4.3f (%4.3f)", devSF,       stdSF));
 	lab.DrawLatex(0.60, 0.60,  Form("sigma: %4.3f (%4.3f)", devSigma,    stdSigma));
-
 	
 	ecC->Print("ecTest.png");
-	
-	
 }
