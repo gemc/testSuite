@@ -1,19 +1,57 @@
 {
 	
-	// standad values
-	double stdConstant = 16.4;
-	double stdSF       = 0.273;   // sampling fraction
-	double stdSigma    = 0.0097;
-	double mom         = 5;       // 5 GeV initial momentum
+	string which[2] = {"master", "branch"};
+	double gausConst[2];
+	double gausMPV[2];
+	double gausSigma[2];
+	TH1F *edep[2];
+	TF1 *landa[2];
+	TFile *f[2];
 	
 	TCanvas *ecC = new TCanvas("ecC", "ecC", 800, 800);
 	
-	TFile finp("ec.root");
 	
-	TH1F *edep = new TH1F("edep", "edep", 100, 0.1, 0.5);
+	
+	
+	for(int w=0; w<2; w++)
+	{
+		f[w] = new TFile(Form("ec%s.root", which[w].c_str()));
+		vector<double> *ecTotE = 0;
+
+		
+		string hTit = Form("edep%s", which[w].c_str());
+		edep[w] = new TH1F(hTit.c_str(), hTit.c_str(), 100, 5, 20);
+		
+		landa[w] = new TF1(Form("land%s", which[w].c_str()), "landau", 5, 20);
+		
+		string plot = Form("totEdep>>%s", hTit.c_str());
+		ftof_p1a->Draw(plot.c_str());
+		
+		edep[w]->Fit("landau");
+		
+		
+		landauConst[w] = edep[w]->GetFunction("landau")->GetParameter(0);
+		landauMPV[w]   = edep[w]->GetFunction("landau")->GetParameter(1);
+		landauSigma[w] = edep[w]->GetFunction("landau")->GetParameter(2);
+		
+		landa[w] = new TF1(Form("land%s", which[w].c_str()), "landau", 5, 20);
+		landa[w]->SetParameter(0, landauConst[w]);
+		landa[w]->SetParameter(1, landauMPV[w]);
+		landa[w]->SetParameter(2, landauSigma[w]);
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// EC Hits
-	vector<double> *ecTotE = 0;
 
 	TTree *ecT  = (TTree*)finp.Get("ec");
 	ecT->SetBranchAddress("totEdep",     &ecTotE);

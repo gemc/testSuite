@@ -13,7 +13,7 @@ wget http://jlab.org/12gev_phys/packages/gcards/clas12.gcard >& /dev/null
 
 # running gemc
 rm -f logC12Running
-./gemc -USE_GUI=0 -SPREAD_P="0.0*GeV, 0*deg, 0*deg" -N=$nevents clas12.gcard -PRINT_EVENT=1 >& logC12Running
+./source/gemc -USE_GUI=0 -SPREAD_P="0.0*GeV, 0*deg, 0*deg" -N=$nevents clas12.gcard -PRINT_EVENT=1 >& logC12Running
 
 # check for timing.
 set time = `grep "Events only time" logC12Running | awk -F"Events only time:" '{print $2}' | awk -F. '{print $1}'`

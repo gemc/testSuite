@@ -1,30 +1,27 @@
-# Running
-# -------
+#!/bin/csh -f
 
-# 2000 events take 24 seconds on my laptop
-set nevents      = 5000
-set standardTime = 60
-
-echo
+set nevents = $1
 
 # ftof gcard
 rm -f ftof.gcard
 wget http://jlab.org/12gev_phys/packages/gcards/ftof.gcard >& /dev/null
 
-# running gemc
-rm -f logFTOFRunning
-./gemc -USE_GUI=0 -SPREAD_P="0.0*GeV, 0*deg, 0*deg" -N=$nevents ftof.gcard -NO_FIELD=all -PRINT_EVENT=100 >& logFTOFRunning
+# running gemc and evio2root
+foreach r (master branch)
+	rm -f logFTOF$r
+	./$r/gemc -USE_GUI=0 -SPREAD_P="0.0*GeV, 0*deg, 0*deg" -N=$nevents ftof.gcard -NO_FIELD=all -PRINT_EVENT=100 >& logFTOF$r
+	$BANKS/bin/evio2root -INPUTF=out.ev -B=experiments/clas12/ftof/ftof  >& /dev/null
+	mv out.root ftof$r.root
+	rm out.ev
+end
 
-# check for timing. 
-set time = `grep "Events only time" logFTOFRunning | awk -F"Events only time:" '{print $2}' | awk -F. '{print $1}'`
-@ time -= $standardTime
-echo " FTOF time test difference: "$time
+# getting times
+set masterTime = `grep "Events only time" logFTOFmaster | awk -F"Events only time:" '{print $2}' | awk -F. '{print $1}'`
+set branchTime = `grep "Events only time" logFTOFbranch | awk -F"Events only time:" '{print $2}' | awk -F. '{print $1}'`
 
-$BANKS/bin/evio2root -INPUTF=out.ev -B=experiments/clas12/ftof/ftof  >& /dev/null
-
-mv out.root ftof.root
-rm out.ev
+echo
+echo " > FTOF Running test for $nevents events"
+echo "  > master time: $masterTime  -  branch time: $branchTime"
 
 root -l -q ftofTest.C | tail -3
 
-echo

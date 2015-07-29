@@ -18,7 +18,7 @@ wget http://jlab.org/12gev_phys/packages/gcards/ctof.gcard >& /dev/null
 
 # running gemc
 rm -f logSolenoidRunning
-./gemc -USE_GUI=0 -SPREAD_P="0.0*GeV, 0*deg, 0*deg" -BEAM_P="pi-, 5*GeV, 90*deg, 0*deg" -BEAM_V="($x, $y, $z)cm" -N=1 ctof.gcard -FIELD_VERBOSITY=99 -HALL_FIELD=clas12-solenoid >& logSolenoidRunning
+./source/gemc -USE_GUI=0 -SPREAD_P="0.0*GeV, 0*deg, 0*deg" -BEAM_P="pi-, 5*GeV, 90*deg, 0*deg" -BEAM_V="($x, $y, $z)cm" -N=1 ctof.gcard -FIELD_VERBOSITY=99 -HALL_FIELD=clas12-solenoid >& logSolenoidRunning
 
 set thisPos   = `grep "Cylindrical: loc. pos. = (5, 6, 2) cm" logSolenoidRunning | awk -F"tr="       '{print $2}' | awk -F"IT=" '{print $1}'`
 set thisField = `grep "Cylindrical: loc. pos. = (5, 6, 2) cm" logSolenoidRunning | awk -F"B = " '{print $2}'`
