@@ -24,7 +24,7 @@
 
 set master = https://github.com/gemc/source.git
 set branch = $1
-echo
+
 
 rm -rf gemcTest; mkdir gemcTest ; cd gemcTest
 
@@ -36,9 +36,11 @@ cd test
 ln -s ../../*.csh .
 ln -s ../../*.C .
 
-echo " > Running tests on $OSRELEASE"
-echo " > Running tests on $OSRELEASE" > result.txt
 echo
+echo " > Running tests on $OSRELEASE"
+echo
+echo > result.txt
+echo " > Running tests on $OSRELEASE" >> result.txt
 
 # compilation
 echo " > Running compilation test..."
@@ -47,25 +49,25 @@ git clone $branch branch>& /dev/null
 
 ./testCompilation.csh >> result.txt
 
-
 # getting and unpacking clas12 geometry
 wget http://jlab.org/12gev_phys/packages/gcards/experiments-devel.tar >& /dev/null
 tar xpvf experiments-devel.tar >& /dev/null
 rm experiments-devel.tar
 
 echo " > Testing clas12 ftof running..."
-./testFTOFRunning.csh 500 | grep -v "0+0" >> result.txt
+./testFTOFRunning.csh 5000 | grep -v "0+0" >> result.txt
 echo " > Testing clas12 ec running..."
-./testECRunning.csh  10   | grep -v "0+0" >> result.txt
-#echo " > $testLog clas12 running..."
-#./testCLAS12Running.csh | grep -v "0+0" >> result.txt
-#echo " > $testLog clas12 solenoid..."
-#./testSolenoidField.csh | grep -v "0+0" >> result.txt
-#echo " > $testLog clas12 torus..."
-#./testTorusField.csh    | grep -v "0+0" >> result.txt
-#echo "... done!"
-#echo
-#
+./testECRunning.csh  1000   | grep -v "0+0" >> result.txt
+echo " > Testing clas12 running..."
+./testCLAS12Running.csh 1000 | grep -v "0+0" >> result.txt
+echo " > Testing clas12 solenoid..."
+./testSolenoidField.csh >> result.txt
+echo " > Testing clas12 torus..."
+./testTorusField.csh    >> result.txt
+echo "... done!"
+echo
+echo >> result.txt
+echo >> result.txt
 
 
 
