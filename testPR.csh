@@ -29,9 +29,7 @@ set branch = $1
 rm -rf gemcTest; mkdir gemcTest ; cd gemcTest
 
 # getting test suite
-#git clone https://github.com/gemc/test.git >& /dev/null
-mkdir test
-cd test
+git clone https://github.com/gemc/test.git >& /dev/null
 
 ln -s ../../*.csh .
 ln -s ../../*.C .
@@ -57,9 +55,9 @@ rm experiments-devel.tar
 echo " > Testing clas12 ftof running..."
 ./testFTOFRunning.csh 5000 | grep -v "0+0" >> result.txt
 echo " > Testing clas12 ec running..."
-./testECRunning.csh  1000   | grep -v "0+0" >> result.txt
+./testECRunning.csh  2000   | grep -v "0+0" >> result.txt
 echo " > Testing clas12 running..."
-./testCLAS12Running.csh 1000 | grep -v "0+0" >> result.txt
+./testCLAS12Running.csh 2000 | grep -v "0+0" >> result.txt
 echo " > Testing clas12 solenoid..."
 ./testSolenoidField.csh >> result.txt
 echo " > Testing clas12 torus..."
