@@ -30,9 +30,7 @@ rm -rf gemcTest; mkdir gemcTest ; cd gemcTest
 
 # getting test suite
 git clone https://github.com/gemc/test.git >& /dev/null
-
-ln -s ../../*.csh .
-ln -s ../../*.C .
+cd test
 
 echo
 echo " > Running tests on $OSRELEASE"
