@@ -10,7 +10,7 @@ wget http://jlab.org/12gev_phys/packages/gcards/ec.gcard >& /dev/null
 # running gemc and evio2root
 foreach r (master branch)
 	rm -f logEC$r
-	./$r/gemc -USE_GUI=0 -SPREAD_P="0.0*GeV, 0*deg, 0*deg"  -BEAM_P="e-, 5*GeV, 25*deg, 3*deg" -N=$nevents ec.gcard -NO_FIELD=all -PRINT_EVENT=10 >& logEC$r
+	./$r/gemc -USE_GUI=0 -SPREAD_P="0.0*GeV, 0*deg, 0*deg"  -BEAM_P="e-, 5*GeV, 25*deg, 3*deg" -N=$nevents ec.gcard -HALL_FIELD=clas12-solenoid -PRINT_EVENT=10 >& logEC$r
 	$BANKS/bin/evio2root -INPUTF=out.ev -B=experiments/clas12/ec/ec  >& /dev/null
 	mv out.root ec$r.root
 	rm out.ev
