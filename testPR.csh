@@ -22,6 +22,17 @@
 #   - clas12 solenoid value at 4 points
 #
 
+if($1 == "-h" || $1 == "" || $#argv < 1 || $#argv > 2) then
+	echo " "
+	echo "Usage:   "
+	echo  "  >> testPR.csh forkGithubAddress"
+	echo  "     compare fork with master repository"
+	echo " "
+	echo " "
+	exit 0
+endif
+
+
 set master = https://github.com/gemc/source.git
 set branch = $1
 
@@ -51,7 +62,7 @@ tar xpvf experiments-devel.tar >& /dev/null
 rm experiments-devel.tar
 
 echo " > Testing clas12 ftof running..."
-./testFTOFRunning.csh 5000 | grep -v "0+0" >> result.txt
+./testFTOFRunning.csh 500 | grep -v "0+0" >> result.txt
 echo " > Testing clas12 ec running..."
 ./testECRunning.csh  2000   | grep -v "0+0" >> result.txt
 echo " > Testing clas12 running..."
