@@ -62,7 +62,7 @@ tar xpvf experiments-devel.tar >& /dev/null
 rm experiments-devel.tar
 
 echo " > Testing clas12 ftof running..."
-./testFTOFRunning.csh 500 | grep -v "0+0" >> result.txt
+./testFTOFRunning.csh 5000 | grep -v "0+0" >> result.txt
 echo " > Testing clas12 ec running..."
 ./testECRunning.csh  2000   | grep -v "0+0" >> result.txt
 echo " > Testing clas12 running..."
