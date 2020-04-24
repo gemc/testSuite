@@ -36,8 +36,8 @@ if [[ $field == "torus" ]]; then
 	maxX=5000
 	minY=1
 	maxY=5000
-	minZ=-3000
-	maxZ=3000
+	minZ=1000
+	maxZ=6000
 	echo "torus field map"
 fi
 
@@ -47,7 +47,7 @@ xvalues=(${(f)"$(jot -r $npoints $minX $maxX)"})
 yvalues=(${(f)"$(jot -r $npoints $minY $maxY)"})
 zvalues=(${(f)"$(jot -r $npoints $minZ $maxZ)"})
 
-fileNamePoints=solenoidPoints$interpolation
+fileNamePoints=$field$interpolation
 
 rm -f $fileNamePoints.txt ; touch $fileNamePoints.txt
 
