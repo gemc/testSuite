@@ -72,7 +72,7 @@ rm -f $fileNameL.txt ; touch $fileNameL.txt
 for i in {1..$npoints}
 do
 	echo vertex $vertex[$i] $interpolation $field
-	./runGemc.sh $vertex[$i] $interpolation $field yes | grep -A1 "Track position in magnetic field map," >> $fileNameG.txt
+	./runGemc.sh $vertex[$i] $interpolation $field yes | grep -A4 "Track position in magnetic field map," >> $fileNameG.txt
 done
 
 
