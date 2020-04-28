@@ -15,6 +15,8 @@ fi
 interpolation=$1
 field=$2
 
+ngreps=1
+
 echo
 echo Interpolation: $interpolation
 echo Field: $field
@@ -38,6 +40,7 @@ if [[ $field == "torus" ]]; then
 	maxY=5000
 	minZ=1000
 	maxZ=6000
+	ngreps=4
 	echo "torus field map"
 fi
 
@@ -72,7 +75,7 @@ rm -f $fileNameL.txt ; touch $fileNameL.txt
 for i in {1..$npoints}
 do
 	echo vertex $vertex[$i] $interpolation $field
-	./runGemc.sh $vertex[$i] $interpolation $field yes | grep -A4 "Track position in magnetic field map," >> $fileNameG.txt
+	./runGemc.sh $vertex[$i] $interpolation $field yes | grep -A$ngreps "Track position in magnetic field map," >> $fileNameG.txt
 done
 
 
