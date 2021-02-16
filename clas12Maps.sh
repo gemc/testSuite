@@ -24,7 +24,7 @@ echo
 
 # units in mm
 
-npoints=100
+npoints=20
 
 minX=1
 maxX=5000
@@ -34,10 +34,10 @@ minZ=-3000
 maxZ=3000
 
 if [[ $field == "torus" ]]; then
-	minX=1
-	maxX=5000
-	minY=1
-	maxY=5000
+	minX=100
+	maxX=2000
+	minY=100
+	maxY=2000
 	minZ=1000
 	maxZ=6000
 	ngreps=4
