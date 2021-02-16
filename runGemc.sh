@@ -1,12 +1,11 @@
-#!/bin/csh
+#!/bin/tcsh
 
+source $JLAB_ROOT/$JLAB_VERSION/ce/jlab.csh keepmine
 
 setenv vertex        "$1"
 setenv interpolation $2
 setenv field         $3
 setenv run           $4
-
-
 
 set option = '-HALL_FIELD=clas12-newSolenoid -FIELD_VERBOSITY=99 -USE_GUI=0 -N=1'
 set fprop  = 'clas12-newSolenoid, 1*mm, G4ClassicalRK4, linear'
@@ -24,7 +23,6 @@ if ($field == "torus") then
 		set fprop  = 'TorusSymmetric, 2*mm, G4ClassicalRK4, none'
 	endif
 endif
-
 
 
 if ( $run == "no") then
