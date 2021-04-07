@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# example:
+#
+# ./clas12Maps.sh Linear torus
 
 if [ "$#" -ne 2 ]; then
 	echo " "       >&2
@@ -61,7 +64,7 @@ if [[ $field == "torus" ]]; then
 	maxY=2000
 	minZ=1000
 	maxZ=6000
-	ngreps=4
+	ngreps=5
 fi
 
 xvalues=(${(f)"$(jot -r $npoints $minX $maxX)"})
