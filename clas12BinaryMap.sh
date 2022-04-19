@@ -48,14 +48,14 @@ echo
 
 # units in mm
 
-npoints=10
+npoints=10000
 
 minX=1
 maxX=5000
 minY=1
 maxY=5000
 minZ=-3000
-maxZ=3000
+maxZ=9000
 
 xvalues=(${(f)"$(jot -r $npoints $minX $maxX)"})
 yvalues=(${(f)"$(jot -r $npoints $minY $maxY)"})
@@ -67,7 +67,7 @@ for i in {1..$npoints}
 do
 	# decimal points
 	decimal=(${(f)"$(jot -r 3 0 1000)"})
-	#echo "("$xvalues[$i]"."$decimal[1]", "$yvalues[$i]"."$decimal[2]", "$zvalues[$i]"."$decimal[3]")mm" >> $fileNamePoints
+	echo "("$xvalues[$i]"."$decimal[1]", "$yvalues[$i]"."$decimal[2]", "$zvalues[$i]"."$decimal[3]")mm" >> $fileNamePoints
 done
 
 vertex=(${(f)"$(cat $fileNamePoints)"})
