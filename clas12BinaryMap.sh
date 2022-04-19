@@ -2,7 +2,7 @@
 
 # example:
 #
-# ./clas12Maps.sh Linear torus
+# ./clas12Maps.sh Linear
 
 if [ "$#" -ne 2 ]; then
 	echo " "       >&2
@@ -11,7 +11,7 @@ if [ "$#" -ne 2 ]; then
 	echo  " $0 interpolation field"  >&2
 	echo " "       >&2
 	echo " interpolation: <None> or <Linear>"  >&2
-	echo " field: <solenoid> or <torus>"       >&2
+	echo " field: <c12BinaryTorusSymmSolenoid2018> or <c12BinaryTorusASymmSolenoid2018>"       >&2
 	echo " "       >&2
 	exit 1
 fi
@@ -25,8 +25,8 @@ fi
 
 field=$2
 
-if [[ $field != "solenoid" && $field != "torus" ]]; then
-	echo " field: <solenoid> or <torus>"       >&2
+if [[ $field != "c12BinaryTorusSymmSolenoid2018" && $field != "c12BinaryTorusASymmSolenoid2018" ]]; then
+	echo " field: <c12BinaryTorusSymmSolenoid2018> or <c12BinaryTorusASymmSolenoid2018>"       >&2
 	exit 1
 fi
 
@@ -57,27 +57,17 @@ maxY=5000
 minZ=-3000
 maxZ=3000
 
-if [[ $field == "torus" ]]; then
-	minX=100
-	maxX=2000
-	minY=100
-	maxY=2000
-	minZ=1000
-	maxZ=6000
-	ngreps=5
-fi
-
 xvalues=(${(f)"$(jot -r $npoints $minX $maxX)"})
 yvalues=(${(f)"$(jot -r $npoints $minY $maxY)"})
 zvalues=(${(f)"$(jot -r $npoints $minZ $maxZ)"})
 
 
-rm -f $fileNamePoints ; touch $fileNamePoints
+#rm -f $fileNamePoints ; touch $fileNamePoints
 for i in {1..$npoints}
 do
 	# decimal points
 	decimal=(${(f)"$(jot -r 3 0 1000)"})
-	echo "("$xvalues[$i]"."$decimal[1]", "$yvalues[$i]"."$decimal[2]", "$zvalues[$i]"."$decimal[3]")mm" >> $fileNamePoints
+	#echo "("$xvalues[$i]"."$decimal[1]", "$yvalues[$i]"."$decimal[2]", "$zvalues[$i]"."$decimal[3]")mm" >> $fileNamePoints
 done
 
 vertex=(${(f)"$(cat $fileNamePoints)"})
